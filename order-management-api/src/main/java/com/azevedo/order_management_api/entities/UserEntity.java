@@ -1,4 +1,4 @@
-package com.azevedo.order_management_api.entity;
+package com.azevedo.order_management_api.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

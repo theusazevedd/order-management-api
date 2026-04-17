@@ -1,6 +1,6 @@
 package com.azevedo.order_management_api.config;
 
-import com.azevedo.order_management_api.entity.UserEntity;
+import com.azevedo.order_management_api.entities.UserEntity;
 import com.azevedo.order_management_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
