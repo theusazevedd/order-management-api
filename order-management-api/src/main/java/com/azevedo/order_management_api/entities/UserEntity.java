@@ -1,15 +1,15 @@
 package com.azevedo.order_management_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_users")
 public class UserEntity {
@@ -23,6 +23,17 @@ public class UserEntity {
     private String phone;
     private String password;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    @Setter(AccessLevel.NONE)
+    private List<OrderEntity> orders = new ArrayList<>();
 
+    public UserEntity(Long id, String name, String email, String phone, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 
 }
