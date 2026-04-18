@@ -43,6 +43,7 @@ public class OrderItem {
         id.setOrderEntity(orderEntity);
     }
 
+    @JsonIgnore
     public ProductEntity getProductEntity() {
         return id.getProductEntity();
     }

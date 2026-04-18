@@ -1,5 +1,6 @@
 package com.azevedo.order_management_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,8 @@ public class ProductEntity {
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
-    joinColumns = @JoinColumn(name = "product_id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id"))
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     @Setter(AccessLevel.NONE)
     private Set<CategoryEntity> categories = new HashSet<>();
 
@@ -38,6 +39,20 @@ public class ProductEntity {
         this.price = price;
         this.imgUrl = imgUrl;
     }
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "id.productEntity")
+    private Set<OrderItem> items = new HashSet<>();
+
+    @JsonIgnore
+    public Set<OrderEntity> getOrders() {
+        Set<OrderEntity> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrderEntity());
+        }
+        return set;
+    }
+
 
     @Override
     public boolean equals(Object o) {
