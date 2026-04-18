@@ -3,18 +3,16 @@ package com.azevedo.order_management_api.entities;
 import com.azevedo.order_management_api.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_orders")
 public class OrderEntity {
@@ -32,6 +30,17 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "id.orderEntity")
+    private Set<OrderItem> items = new HashSet<>();
+
+    public OrderEntity(Long id, Instant moment, OrderStatus orderStatus, UserEntity client) {
+        this.id = id;
+        this.moment = moment;
+        this.orderStatus = orderStatus;
+        this.client = client;
+    }
 
     @Override
     public boolean equals(Object o) {

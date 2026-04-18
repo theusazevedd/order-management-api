@@ -1,14 +1,8 @@
 package com.azevedo.order_management_api.config;
 
-import com.azevedo.order_management_api.entities.CategoryEntity;
-import com.azevedo.order_management_api.entities.OrderEntity;
-import com.azevedo.order_management_api.entities.ProductEntity;
-import com.azevedo.order_management_api.entities.UserEntity;
+import com.azevedo.order_management_api.entities.*;
 import com.azevedo.order_management_api.entities.enums.OrderStatus;
-import com.azevedo.order_management_api.repository.CategoryRepository;
-import com.azevedo.order_management_api.repository.OrderRepository;
-import com.azevedo.order_management_api.repository.ProductRepository;
-import com.azevedo.order_management_api.repository.UserRepository;
+import com.azevedo.order_management_api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -69,6 +66,12 @@ public class TestConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
     }
 }

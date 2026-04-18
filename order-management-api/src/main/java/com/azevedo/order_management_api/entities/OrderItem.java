@@ -1,6 +1,7 @@
 package com.azevedo.order_management_api.entities;
 
 import com.azevedo.order_management_api.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -21,18 +22,19 @@ public class OrderItem {
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
     private Double price;
 
-    public OrderItem(OrderEntity orderEntity, ProductEntity productEntity, Double price, Integer quantity) {
+    public OrderItem(OrderEntity orderEntity, ProductEntity productEntity, Integer quantity, Double price) {
         this.price = price;
         this.quantity = quantity;
         this.id.setOrderEntity(orderEntity);
         this.id.setProductEntity(productEntity);
     }
 
+    @JsonIgnore
     public OrderEntity getOrderEntity() {
         return id.getOrderEntity();
     }
