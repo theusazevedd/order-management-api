@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -36,5 +37,16 @@ public class ProductEntity {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ProductEntity that)) return false;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

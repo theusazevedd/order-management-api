@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -36,4 +37,14 @@ public class UserEntity {
         this.password = password;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof UserEntity that)) return false;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

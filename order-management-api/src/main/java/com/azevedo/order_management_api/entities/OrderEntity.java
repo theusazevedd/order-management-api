@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -32,6 +33,16 @@ public class OrderEntity {
     @JoinColumn(name = "client_id")
     private UserEntity client;
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof OrderEntity that)) return false;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
 
 }

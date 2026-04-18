@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -47,4 +49,14 @@ public class OrderItem {
         id.setProductEntity(productEntity);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof OrderItem orderItem)) return false;
+        return Objects.equals(id, orderItem.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
