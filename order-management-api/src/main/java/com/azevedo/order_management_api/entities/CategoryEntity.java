@@ -1,5 +1,6 @@
 package com.azevedo.order_management_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,8 @@ public class CategoryEntity {
 
     private String name;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     @Setter(AccessLevel.NONE)
     private Set<ProductEntity> products = new HashSet<>();
 
