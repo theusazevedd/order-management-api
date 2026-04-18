@@ -35,6 +35,9 @@ public class OrderEntity {
     @OneToMany(mappedBy = "id.orderEntity")
     private Set<OrderItem> items = new HashSet<>();
 
+    @OneToOne(mappedBy = "orderEntity", cascade = CascadeType.ALL)
+    private PaymentEntity paymentEntity;
+
     public OrderEntity(Long id, Instant moment, OrderStatus orderStatus, UserEntity client) {
         this.id = id;
         this.moment = moment;
