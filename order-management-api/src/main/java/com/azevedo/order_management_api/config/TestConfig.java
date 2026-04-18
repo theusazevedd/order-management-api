@@ -2,10 +2,12 @@ package com.azevedo.order_management_api.config;
 
 import com.azevedo.order_management_api.entities.CategoryEntity;
 import com.azevedo.order_management_api.entities.OrderEntity;
+import com.azevedo.order_management_api.entities.ProductEntity;
 import com.azevedo.order_management_api.entities.UserEntity;
 import com.azevedo.order_management_api.entities.enums.OrderStatus;
 import com.azevedo.order_management_api.repository.CategoryRepository;
 import com.azevedo.order_management_api.repository.OrderRepository;
+import com.azevedo.order_management_api.repository.ProductRepository;
 import com.azevedo.order_management_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,7 +41,14 @@ public class TestConfig implements CommandLineRunner {
         CategoryEntity cat2 = new CategoryEntity(null, "Books");
         CategoryEntity cat3 = new CategoryEntity(null, "Computers");
 
+        ProductEntity p1 = new ProductEntity(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        ProductEntity p2 = new ProductEntity(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        ProductEntity p3 = new ProductEntity(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        ProductEntity p4 = new ProductEntity(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        ProductEntity p5 = new ProductEntity(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
         UserEntity u1 = new UserEntity(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         UserEntity u2 = new UserEntity(null, "Alex Green", "alex@gmail.com", "977777777", "123456");

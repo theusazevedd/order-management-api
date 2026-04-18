@@ -1,15 +1,14 @@
 package com.azevedo.order_management_api.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_categories")
 public class CategoryEntity {
@@ -20,5 +19,12 @@ public class CategoryEntity {
 
     private String name;
 
+    @Transient
+    @Setter(AccessLevel.NONE)
+    private Set<ProductEntity> products = new HashSet<>();
 
+    public CategoryEntity(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
