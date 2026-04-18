@@ -45,6 +45,14 @@ public class OrderEntity {
         this.client = client;
     }
 
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItem x : items) {
+            sum += x.getSubTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof OrderEntity that)) return false;

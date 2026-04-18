@@ -1,5 +1,6 @@
 package com.azevedo.order_management_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class PaymentEntity {
 
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private OrderEntity orderEntity;
