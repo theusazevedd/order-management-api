@@ -1,7 +1,7 @@
 package com.azevedo.order_management_api.controller;
 
-import com.azevedo.order_management_api.entities.UserEntity;
-import com.azevedo.order_management_api.repository.UserRepository;
+import com.azevedo.order_management_api.dto.UserInDTO;
+import com.azevedo.order_management_api.dto.UserOutDTO;
 import com.azevedo.order_management_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +16,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping
-    public ResponseEntity<List<UserEntity>> findAll() {
-        List<UserEntity> list = userService.findAll();
+    public ResponseEntity<List<UserOutDTO>> findAll() {
+        List<UserOutDTO> list = userService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> findById(@PathVariable Long id) {
-        UserEntity userEntity = userService.findById(id);
-        return ResponseEntity.ok().body(userEntity);
+    public ResponseEntity<UserOutDTO> findById(@PathVariable Long id) {
+        UserOutDTO userOutDTO = userService.findById(id);
+        return ResponseEntity.ok().body(userOutDTO);
     }
 
     @PostMapping
-    public ResponseEntity<UserEntity> insert(@RequestBody UserEntity obj) {
-        UserEntity userEntity = userService.insert(obj);
-        return ResponseEntity.ok().body(userEntity);
+    public ResponseEntity<UserOutDTO> insert(@RequestBody UserInDTO obj) {
+        UserOutDTO userOutDTO = userService.insert(obj);
+        return ResponseEntity.ok().body(userOutDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -42,9 +41,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserEntity> update(@PathVariable Long id, @RequestBody UserEntity obj) {
-        obj = userService.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<UserOutDTO> update(@PathVariable Long id, @RequestBody UserInDTO obj) {
+        UserOutDTO userOutDTO = userService.update(id, obj);
+        return ResponseEntity.ok().body(userOutDTO);
     }
 
 }

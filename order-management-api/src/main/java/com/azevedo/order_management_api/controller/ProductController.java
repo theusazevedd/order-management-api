@@ -1,6 +1,6 @@
 package com.azevedo.order_management_api.controller;
 
-import com.azevedo.order_management_api.entities.ProductEntity;
+import com.azevedo.order_management_api.dto.ProductOutDTO;
 import com.azevedo.order_management_api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,18 +19,16 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductEntity>> findAll() {
-        List<ProductEntity> list = productService.findAll();
+    public ResponseEntity<List<ProductOutDTO>> findAll() {
+        List<ProductOutDTO> list = productService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductEntity> findById(@PathVariable Long id) {
-        ProductEntity productEntity = productService.findById(id);
-        return ResponseEntity.ok().body(productEntity);
+    public ResponseEntity<ProductOutDTO> findById(@PathVariable Long id) {
+        ProductOutDTO productOutDTO = productService.findById(id);
+        return ResponseEntity.ok().body(productOutDTO);
     }
-
-
 
 
 }
