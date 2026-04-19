@@ -30,5 +30,15 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public UserEntity update(Long id, UserEntity obj) {
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id.toString()));
+
+        user.setName(obj.getName());
+        user.setEmail(obj.getEmail());
+        user.setPhone(obj.getPhone());
+
+        return userRepository.save(user);
+    }
 
 }
