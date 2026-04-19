@@ -22,5 +22,9 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ID não encontrado"));
     }
 
+    public UserEntity insert(UserEntity obj) {
+        return userRepository.save(obj);
+    }
+
 
 }

@@ -5,10 +5,7 @@ import com.azevedo.order_management_api.repository.UserRepository;
 import com.azevedo.order_management_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
     @GetMapping
     public ResponseEntity<List<UserEntity>> findAll() {
@@ -31,7 +29,10 @@ public class UserController {
         return ResponseEntity.ok().body(userEntity);
     }
 
-
-
+    @PostMapping
+    public ResponseEntity<UserEntity> insert(@RequestBody UserEntity obj) {
+        UserEntity userEntity = userService.insert(obj);
+        return ResponseEntity.ok().body(userEntity);
+    }
 
 }
